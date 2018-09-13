@@ -1,0 +1,89 @@
+
+<!DOCTYPE html><html lang='en' >
+<head>
+
+<title> D3.js Experiment</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta charset='UTF-8'>
+
+
+<style>
+
+
+
+body {
+
+overflow-y:hidden;
+
+
+background: #232526;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+height: 100vh;
+
+}
+
+.svgContainer
+{
+   
+box-shadow: -5px 16px 40px -2px rgba(0,0,0,0.36);
+-webkit-box-shadow: -5px 16px 40px -2px rgba(0,0,0,0.36);
+-moz-box-shadow: -5px 16px 40px -2px rgba(0,0,0,0.36);
+}
+
+</style>
+</head>
+<body>
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+
+
+<script >var h = Math.sqrt(6) / 3,
+radius = 175,
+xp = 350,
+yp = 250,
+hexagonData = [
+{ "x": radius + xp, "y": yp },
+{ "x": radius / 2 + xp, "y": radius * h + yp },
+{ "x": -radius / 2 + xp, "y": radius * h + yp },
+{ "x": -radius + xp, "y": yp },
+{ "x": -radius / 2 + xp, "y": -radius * h + yp },
+{ "x": radius / 2 + xp, "y": -radius * h + yp }];
+
+
+
+drawHexagon =
+d3.svg.line().
+x(function (d) {return d.x;}).
+y(function (d) {return d.y;}).
+interpolate("cardinal-closed").
+tension("0.25");
+
+
+var svgContainer =
+d3.select("body").
+append("svg").
+attr("width", 600).
+attr("height", 600);
+
+
+var enterElements =
+svgContainer.append("path").
+attr("d", drawHexagon(hexagonData)).
+attr("stroke", "rgba(25, 255, 255,0.911)").
+attr("stroke-dasharray", "20,5").
+attr("stroke-width", 3).
+attr("fill", "rgba(0, 153, 153,0.6)");
+
+</script>
+</body></html>
